@@ -1,11 +1,11 @@
 /* ═══════════════ Menu data ═══════════════
-   عدّل الأصناف من هنا مباشرة — الصور في مجلد images/menu/
+   عدّل الأصناف من هنا مباشرة — الأصل في images/menu/ والنسخ المضغوطة في images/thumbs/
    الصنف الذي بلا صورة (بدون img) يظهر كسطر نصي أنيق مثل المنيو المطبوع. */
 const MENU = [
   {
     id: 'beef', en: 'Beef Burgers', label: 'برغر لحم', emoji: '🍔',
     items: [
-      { name: 'دبل تشيز برغر', desc: 'قطعتان لحم عصاري، جبنة شيدر مضاعفة، طماطم، خس، صوص سكاي الخاص', img: 'images/menu/beef-combo.jpg', tag: 'الأكثر طلبًا' },
+      { name: 'دبل تشيز برغر', desc: 'قطعتان لحم عصاري، جبنة شيدر مضاعفة، طماطم، خس، صوص سكاي الخاص', img: 'images/thumbs/menu-beef-combo.jpg', tag: 'الأكثر طلبًا' },
       { name: 'كلاسيك برغر',   desc: 'قطعة لحم عصارية، جبنة شيدر، خس، طماطم، صوص سكاي' },
       { name: 'سكاي سبيشل',    desc: 'برغر السلسلة الخاص بصوص سكاي السري والمقرمشات', tag: 'جديد' },
       { name: 'ماشروم برغر',   desc: 'لحم عصاري مع فطر سوتيه وجبنة ذائبة' },
@@ -14,7 +14,7 @@ const MENU = [
   {
     id: 'chicken', en: 'Chicken Burgers', label: 'برغر دجاج', emoji: '🍗',
     items: [
-      { name: 'كرسبي تشيكن', desc: 'صدر دجاج مقرمش، جبنة شيدر، كول سلو، صوص سكاي الحار', img: 'images/menu/chicken-combo.jpg', tag: 'مميز' },
+      { name: 'كرسبي تشيكن', desc: 'صدر دجاج مقرمش، جبنة شيدر، كول سلو، صوص سكاي الحار', img: 'images/thumbs/menu-chicken-combo.jpg', tag: 'مميز' },
       { name: 'زنجر حار',    desc: 'دجاج مقرمش حار، خس، جبنة، صوص حار خاص' },
       { name: 'تشيكن سكاي',  desc: 'دبل دجاج مقرمش بصوص سكاي والجبنة الذائبة' },
     ],
@@ -22,8 +22,8 @@ const MENU = [
   {
     id: 'sides', en: 'Fries & Sides', label: 'بطاطا وسايدات', emoji: '🍟',
     items: [
-      { name: 'بطاطا سكاي',        desc: 'بطاطا ذهبية مقرمشة بتتبيلة سكاي الخاصة', img: 'images/menu/fries.jpg' },
-      { name: 'صوص سكاي الخاص',    desc: 'الصوص السري الذي يكمّل كل وجبة — اطلبه مع أي صنف', img: 'images/menu/sauce.jpg' },
+      { name: 'بطاطا سكاي',        desc: 'بطاطا ذهبية مقرمشة بتتبيلة سكاي الخاصة', img: 'images/thumbs/menu-fries.jpg' },
+      { name: 'صوص سكاي الخاص',    desc: 'الصوص السري الذي يكمّل كل وجبة — اطلبه مع أي صنف', img: 'images/thumbs/menu-sauce.jpg' },
       { name: 'بطاطا بالجبنة',     desc: 'بطاطا ذهبية مغطاة بصوص الجبنة الذائبة' },
       { name: 'أصابع موزاريلا',    desc: 'قطع موزاريلا مقلية مع صوص المارينارا' },
     ],
@@ -31,7 +31,7 @@ const MENU = [
   {
     id: 'drinks', en: 'Cold Drinks', label: 'مشروبات', emoji: '🥤',
     items: [
-      { name: 'مشروب غازي', desc: 'كوكاكولا · سبرايت · فانتا — مثلّج ومنعش', img: 'images/menu/soda.jpg' },
+      { name: 'مشروب غازي', desc: 'كوكاكولا · سبرايت · فانتا — مثلّج ومنعش', img: 'images/thumbs/menu-soda.jpg' },
       { name: 'عصير طبيعي', desc: 'برتقال · فراولة · مانجو — طازج يوميًا' },
       { name: 'سلاش سكاي',  desc: 'سلاش منعش بنكهات متعددة — توت، فراولة، بلو سكاي' },
     ],
@@ -39,14 +39,14 @@ const MENU = [
   {
     id: 'desserts', en: 'Desserts', label: 'حلويات', emoji: '🍦',
     items: [
-      { name: 'صنداي فراولة', desc: 'آيس كريم كريمي يعلوه صوص الفراولة', img: 'images/menu/sundae.jpg', tag: 'جديد' },
+      { name: 'صنداي فراولة', desc: 'آيس كريم كريمي يعلوه صوص الفراولة', img: 'images/thumbs/menu-sundae.jpg', tag: 'جديد' },
     ],
   },
   {
     id: 'boxes', en: 'Family Boxes', label: 'بوكسات عائلية', emoji: '📦',
     items: [
-      { name: 'بوكس العائلة',     desc: '4 برغر مشكّل (لحم ودجاج) + 4 بطاطا سكاي', img: 'images/menu/family-box.jpg', tag: 'وفّر أكثر' },
-      { name: 'بوكس سكاي الكبير', desc: '6 برغر مشكّل + 6 بطاطا سكاي — يكفي كل العائلة', img: 'images/menu/mega-box.jpg' },
+      { name: 'بوكس العائلة',     desc: '4 برغر مشكّل (لحم ودجاج) + 4 بطاطا سكاي', img: 'images/thumbs/menu-family-box.jpg', tag: 'وفّر أكثر' },
+      { name: 'بوكس سكاي الكبير', desc: '6 برغر مشكّل + 6 بطاطا سكاي — يكفي كل العائلة', img: 'images/thumbs/menu-mega-box.jpg' },
       { name: 'بوكس ثنائي',       desc: '2 برغر + 2 بطاطا + 2 مشروب' },
     ],
   },
@@ -178,7 +178,49 @@ function closeMenu() {
   document.body.style.overflow = '';
 }
 
+/* ═══════════════ Gallery lightbox ═══════════════ */
+const lightbox   = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxCap = document.getElementById('lightboxCap');
+const galleryItems = Array.from(document.querySelectorAll('.gallery-item'));
+let lightboxIndex = 0;
+
+function renderLightbox() {
+  const btn = galleryItems[lightboxIndex];
+  lightboxImg.style.opacity = '0.3';
+  lightboxImg.onload = () => { lightboxImg.style.opacity = '1'; };
+  lightboxImg.src = btn.dataset.full;
+  lightboxImg.alt = btn.dataset.alt || '';
+  lightboxCap.textContent = btn.dataset.alt || '';
+}
+
+function openLightbox(i) {
+  lightboxIndex = i;
+  renderLightbox();
+  lightbox.classList.remove('hidden');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  lightbox.classList.add('hidden');
+  lightboxImg.src = '';
+  document.body.style.overflow = '';
+}
+
+function lightboxNav(dir) {
+  lightboxIndex = (lightboxIndex + dir + galleryItems.length) % galleryItems.length;
+  renderLightbox();
+}
+
+galleryItems.forEach((btn, i) => btn.addEventListener('click', () => openLightbox(i)));
+
 document.addEventListener('keydown', e => {
+  if (!lightbox.classList.contains('hidden')) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') lightboxNav(-1); /* RTL: right arrow = previous */
+    if (e.key === 'ArrowLeft')  lightboxNav(1);
+    return;
+  }
   if (e.key === 'Escape' && !modal.classList.contains('hidden')) closeMenu();
 });
 
