@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>مطعم سكاي | Sky — فاست فود وبرغر</title>
+  <meta name="description" content="مطعم سكاي للفاست فود والبرغر — طرابلس، حي الأندلس، داخل مارينا الأندلس. برغر عصاري، دجاج مقرمش، بطاطا ذهبية وصوصات خاصة." />
+  <meta name="theme-color" content="#4dc9dc" />
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&family=Great+Vibes&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sky: {
+              50:  '#effbfc',
+              100: '#d6f4f7',
+              200: '#b2e9ef',
+              300: '#7dd8e3',
+              400: '#4dc9dc', /* brand */
+              500: '#2aabc1',
+              600: '#268aa2',
+              700: '#256f84',
+              800: '#265b6c',
+              900: '#244c5c',
+              950: '#13323e',
+            },
+            cream: '#fffdf8',
+            gold:  '#f6b93b',
+          },
+          fontFamily: {
+            sans:   ['Tajawal', 'sans-serif'],
+            script: ['"Great Vibes"', 'cursive'],
+          },
+          boxShadow: {
+            soft: '0 20px 60px -15px rgba(38, 138, 162, 0.25)',
+            card: '0 10px 40px -10px rgba(19, 50, 62, 0.15)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { -webkit-font-smoothing: antialiased; }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    @keyframes floaty { 0%,100% { transform: translateY(0) rotate(-3deg) } 50% { transform: translateY(-10px) rotate(-3deg) } }
+    .floaty { animation: floaty 5s ease-in-out infinite; }
+
+    /* Menu modal transitions */
+    #menuModal { transition: opacity .35s ease; }
+    #menuModal.hidden-anim { opacity: 0; pointer-events: none; }
+    #menuPanel { transition: transform .45s cubic-bezier(.22,1,.36,1), opacity .35s ease; }
+    #menuModal.hidden-anim #menuPanel { transform: translateY(40px) scale(.98); opacity: 0; }
+
+    .menu-scroll::-webkit-scrollbar { width: 6px; }
+    .menu-scroll::-webkit-scrollbar-thumb { background: #7dd8e3; border-radius: 99px; }
+
+    /* paper feel for the menu sheet */
+    .menu-paper {
+      background-color: #fdfbf4;
+      background-image: radial-gradient(rgba(38, 138, 162, 0.05) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+
+    /* Gallery: snap carousel on mobile */
+    .snap-row { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+    .snap-row > * { scroll-snap-align: center; }
+    .snap-row::-webkit-scrollbar { display: none; }
+
+    /* Sticky mobile action bar safe area */
+    .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 0.75rem); }
+  </style>
+</head>
+
+<body class="font-sans bg-cream text-sky-950 pb-20 md:pb-0">
+
+  <!-- ══════════════ NAVBAR ══════════════ -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-40 transition-all duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <nav class="flex items-center justify-between h-16 sm:h-20">
+        <a href="#home" class="flex items-center gap-2">
+          <span class="font-script text-4xl sm:text-5xl text-white leading-none nav-logo transition-colors">Sky</span>
+        </a>
+
+        <div class="hidden md:flex items-center gap-7 text-sm font-bold text-white nav-links transition-colors">
+          <a href="#home"     class="hover:opacity-70 transition">الرئيسية</a>
+          <a href="#policies" class="hover:opacity-70 transition">سياساتنا</a>
+          <a href="#gallery"  class="hover:opacity-70 transition">أجواؤنا</a>
+          <a href="#goal"     class="hover:opacity-70 transition">هدفنا</a>
+          <a href="#vision"   class="hover:opacity-70 transition">رؤيتنا</a>
+          <a href="#contact"  class="hover:opacity-70 transition">تواصل معنا</a>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button onclick="openMenu()"
+            class="hidden md:block bg-white text-sky-600 hover:bg-sky-50 font-extrabold text-base px-7 py-2.5 rounded-full shadow-soft transition-transform hover:scale-105 active:scale-95 nav-cta">
+            🍔 المنيو
+          </button>
+          <!-- mobile burger -->
+          <button id="mobileBtn" class="md:hidden text-white nav-links p-2 -m-2" aria-label="القائمة">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </div>
+
+    <!-- mobile dropdown -->
+    <div id="mobileMenu" class="md:hidden hidden bg-white/95 backdrop-blur border-t border-sky-100 shadow-card">
+      <div class="px-6 py-3 flex flex-col text-sky-900 font-bold text-lg">
+        <a href="#home"     class="mobile-link py-3.5 border-b border-sky-50">الرئيسية</a>
+        <a href="#policies" class="mobile-link py-3.5 border-b border-sky-50">سياساتنا</a>
+        <a href="#gallery"  class="mobile-link py-3.5 border-b border-sky-50">أجواؤنا</a>
+        <a href="#goal"     class="mobile-link py-3.5 border-b border-sky-50">هدفنا</a>
+        <a href="#vision"   class="mobile-link py-3.5 border-b border-sky-50">رؤيتنا</a>
+        <a href="#contact"  class="mobile-link py-3.5">تواصل معنا</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ══════════════ HERO ══════════════ -->
+  <section id="home" class="relative overflow-hidden bg-gradient-to-b from-sky-400 via-sky-400 to-sky-500 text-white">
+    <div class="absolute -top-24 -left-24 w-72 sm:w-96 h-72 sm:h-96 rounded-full bg-white/10 blur-2xl"></div>
+    <div class="absolute top-40 -right-32 w-80 sm:w-[28rem] h-80 sm:h-[28rem] rounded-full bg-sky-300/30 blur-3xl"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-24 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <!-- text -->
+      <div class="text-center lg:text-right">
+        <p class="font-script text-5xl sm:text-7xl mb-2 drop-shadow-sm">Sky</p>
+        <h1 class="text-3xl sm:text-5xl font-black leading-tight mb-4">
+          مطعم سكاي<br class="sm:hidden" />
+          <span class="text-sky-100">للفاست فود والبرغر</span>
+        </h1>
+        <p class="text-sky-50/95 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6">
+          وجهتك لعشاق الوجبات السريعة بطعم مختلف وجودة عالية. نقدم تشكيلة متنوعة من البرغر العصاري
+          المحضّر من مكونات طازجة، والدجاج المقرمش، والبطاطا الذهبية، إلى جانب الصوصات الخاصة التي
+          تضيف لمسة مميزة لكل وجبة.
+        </p>
+
+        <!-- tags: swipeable row on mobile -->
+        <div class="snap-row flex lg:flex-wrap justify-start lg:justify-start gap-2.5 mb-8 overflow-x-auto px-1 -mx-1">
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🍔 برغر عصاري</span>
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🍗 دجاج مقرمش</span>
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🍟 بطاطا ذهبية</span>
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🥫 صوصات خاصة</span>
+        </div>
+
+        <!-- CTAs: full-width stacked on mobile -->
+        <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3.5 sm:gap-4">
+          <button onclick="openMenu()"
+            class="w-full sm:w-auto bg-white text-sky-600 font-black text-lg px-9 py-4 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
+            شاهد المنيو 🍔
+          </button>
+          <a href="tel:0910868888"
+            class="w-full sm:w-auto text-center bg-sky-950/25 backdrop-blur border-2 border-white/60 text-white font-black text-lg px-9 py-4 rounded-full hover:bg-white hover:text-sky-600 transition-colors">
+            اتصل بنا 📞
+          </a>
+        </div>
+      </div>
+
+      <!-- hero photos -->
+      <div class="relative flex justify-center mt-2 lg:mt-0">
+        <div class="absolute inset-6 bg-white/20 rounded-full blur-3xl"></div>
+        <img src="images/hero-burger.jpg" alt="برغر سكاي مع مشروب سكاي الأزرق"
+             onerror="this.onerror=null;this.src='images/placeholder.svg'"
+             class="relative w-64 sm:w-80 lg:w-96 aspect-[4/5] object-cover rounded-[2rem] shadow-2xl rotate-2 border-4 border-white/70" />
+        <img src="images/fries-cup.jpg" alt="بطاطا سكاي الذهبية"
+             onerror="this.remove()"
+             class="absolute -bottom-4 right-2 sm:right-8 lg:right-0 w-28 sm:w-36 aspect-[3/4] object-cover rounded-2xl shadow-xl border-4 border-white/80 floaty" />
+      </div>
+    </div>
+
+    <!-- wave divider -->
+    <svg class="block w-full text-cream -mb-px" viewBox="0 0 1440 90" fill="currentColor" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,60 C280,110 520,0 760,25 C1000,50 1240,95 1440,45 L1440,90 L0,90 Z"/>
+    </svg>
+  </section>
+
+  <!-- ══════════════ POLICIES + STANDARDS ══════════════ -->
+  <section id="policies" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+    <div class="text-center mb-10 sm:mb-14 reveal">
+      <p class="text-sky-500 font-extrabold tracking-wide mb-2">لماذا سكاي؟</p>
+      <h2 class="text-2xl sm:text-4xl font-black">التزامنا تجاهك في كل وجبة</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-5 sm:gap-7">
+      <!-- policies card -->
+      <div class="reveal bg-white rounded-3xl p-6 sm:p-10 shadow-card border border-sky-100 md:hover:-translate-y-1.5 transition-transform duration-300">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-sky-100 flex items-center justify-center text-3xl mb-5">📋</div>
+        <h3 class="text-xl sm:text-2xl font-black mb-3 text-sky-700">سياساتنا</h3>
+        <p class="text-sky-900/75 leading-relaxed text-base sm:text-lg">
+          نلتزم بتقديم الطعام الطازج، الحفاظ على نظافة المكان والمطبخ، سرعة تجهيز الطلبات،
+          واحترام ملاحظات العملاء لضمان أفضل تجربة ممكنة.
+        </p>
+        <ul class="mt-5 space-y-3 text-sky-900/80 font-medium">
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> طعام طازج يوميًا</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> نظافة تامة للمكان والمطبخ</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> سرعة في تجهيز الطلبات</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> إصغاء دائم لملاحظات عملائنا</li>
+        </ul>
+      </div>
+
+      <!-- standards card -->
+      <div class="reveal bg-gradient-to-br from-sky-500 to-sky-700 text-white rounded-3xl p-6 sm:p-10 shadow-soft md:hover:-translate-y-1.5 transition-transform duration-300">
+        <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/15 flex items-center justify-center text-3xl mb-5">⭐</div>
+        <h3 class="text-xl sm:text-2xl font-black mb-3">معاييرنا</h3>
+        <p class="text-sky-50/90 leading-relaxed text-base sm:text-lg">
+          نعتمد على مكونات مختارة بعناية، تحضير يومي، جودة ثابتة في كل وجبة،
+          وخدمة احترافية تضع رضا العميل في المقام الأول.
+        </p>
+        <ul class="mt-5 space-y-3 font-medium">
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> مكونات مختارة بعناية</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> تحضير يومي طازج</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> جودة ثابتة في كل وجبة</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> خدمة احترافية تضع رضاك أولًا</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ GALLERY ══════════════ -->
+  <section id="gallery" class="py-16 sm:py-24 bg-sky-50/70 border-y border-sky-100 overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex items-end justify-between gap-4 mb-8 sm:mb-12 reveal">
+        <div>
+          <p class="text-sky-500 font-extrabold tracking-wide mb-2">📸 من أجواء سكاي</p>
+          <h2 class="text-2xl sm:text-4xl font-black">لقطات من عالمنا</h2>
+        </div>
+        <a href="https://www.instagram.com/sky_eatly/" target="_blank" rel="noopener"
+           class="shrink-0 inline-flex items-center gap-2 bg-white border border-sky-200 text-sky-600 font-extrabold text-sm px-4 sm:px-5 py-2.5 rounded-full shadow-sm hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-colors">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.2-.1 1.6-.1 4.8-.1zm0 2c-3.1 0-3.5 0-4.7.1-1.1.1-1.5.2-1.8.3-.4.2-.7.3-1 .6-.3.3-.5.6-.6 1-.1.3-.3.7-.3 1.8-.1 1.2-.1 1.6-.1 4.7s0 3.5.1 4.7c.1 1.1.2 1.5.3 1.8.2.4.3.7.6 1 .3.3.6.5 1 .6.3.1.7.3 1.8.3 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.5-.2 1.8-.3.4-.2.7-.3 1-.6.3-.3.5-.6.6-1 .1-.3.3-.7.3-1.8.1-1.2.1-1.6.1-4.7s0-3.5-.1-4.7c-.1-1.1-.2-1.5-.3-1.8-.2-.4-.3-.7-.6-1-.3-.3-.6-.5-1-.6-.3-.1-.7-.3-1.8-.3-1.2-.1-1.6-.1-4.7-.1zm0 3.4a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm0 2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm4.6-3.5a1 1 0 110 2 1 1 0 010-2z"/></svg>
+          sky_eatly
+        </a>
+      </div>
+    </div>
+
+    <!-- mobile: swipe carousel · desktop: grid -->
+    <div class="snap-row reveal flex md:grid md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5 overflow-x-auto md:overflow-visible px-4 sm:px-6 md:max-w-6xl md:mx-auto pb-2">
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/gallery/storefront-sign.jpg" alt="واجهة مطعم سكاي" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/gallery/counter-service.jpg" alt="تجهيز الطلبات في سكاي" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/combo-flatlay.jpg" alt="وجبة سكاي — برغر وبطاطا" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/gallery/family-picnic.jpg" alt="بوكس سكاي العائلي" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/gallery/juice-lights.jpg" alt="مشروبات سكاي" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/gallery/slushy-sky.jpg" alt="سلاش سكاي" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/gallery/travel-box.jpg" alt="سكاي ترافل بوكس" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+      <figure class="shrink-0 w-64 md:w-auto rounded-3xl overflow-hidden shadow-card bg-white">
+        <img src="images/fries-cup.jpg" alt="بطاطا سكاي الذهبية" loading="lazy" class="w-full h-72 md:h-64 object-cover hover:scale-105 transition-transform duration-500" />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ══════════════ GOAL ══════════════ -->
+  <section id="goal">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+      <div class="reveal order-2 lg:order-1 relative flex justify-center">
+        <div class="absolute inset-10 bg-sky-200/50 rounded-full blur-3xl"></div>
+        <img src="images/family-box.jpg" alt="بوكس عائلي من سكاي"
+             onerror="this.onerror=null;this.src='images/placeholder.svg'"
+             loading="lazy"
+             class="relative w-full max-w-lg rounded-3xl shadow-card object-cover" />
+      </div>
+      <div class="reveal order-1 lg:order-2 text-center lg:text-right">
+        <div class="inline-flex items-center gap-2 bg-sky-100 text-sky-700 font-extrabold px-4 py-1.5 rounded-full text-sm mb-4">🎯 هدفنا</div>
+        <h2 class="text-2xl sm:text-4xl font-black mb-4 leading-snug">وجبات لذيذة… بأسعار مناسبة وجودة تعتمد عليها</h2>
+        <p class="text-sky-900/75 text-base sm:text-lg leading-relaxed">
+          تقديم وجبات فاست فود لذيذة بأسعار مناسبة وجودة يمكن للعملاء الاعتماد عليها في كل زيارة.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════ VISION ══════════════ -->
+  <section id="vision" class="relative overflow-hidden text-white">
+    <img src="images/storefront.jpg" alt="" aria-hidden="true" loading="lazy"
+         class="absolute inset-0 w-full h-full object-cover" />
+    <div class="absolute inset-0 bg-gradient-to-b from-sky-900/90 via-sky-800/85 to-sky-700/90"></div>
+
+    <div class="relative max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center reveal">
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 font-extrabold px-5 py-2 rounded-full text-sm mb-6">🚀 رؤيتنا</div>
+      <p class="font-script text-5xl sm:text-6xl mb-6 text-sky-200">Sky</p>
+      <h2 class="text-2xl sm:text-4xl font-black mb-5 leading-snug">علامة رائدة في عالم البرغر والفاست فود</h2>
+      <p class="text-sky-50/90 text-base sm:text-xl leading-relaxed">
+        أن نرسّخ علامة سكاي كوجهة رائدة في عالم البرغر والفاست فود، بمعايير تشغيل عالمية وهوية محلية
+        مميزة. نسعى لبناء براند موثوق يتوسع بثبات، ويُعرف بتجربة متكاملة تجمع بين الجودة، الابتكار،
+        سرعة الخدمة، والطعم الذي يجعل العملاء يعودون إلينا بثقة في كل مرة.
+      </p>
+      <button onclick="openMenu()"
+        class="mt-9 w-full sm:w-auto bg-white text-sky-700 font-black text-lg px-10 py-4 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
+        اكتشف قائمتنا 🍟
+      </button>
+    </div>
+  </section>
+
+  <!-- ══════════════ CONTACT / FOOTER ══════════════ -->
+  <footer id="contact" class="bg-sky-950 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 items-start text-center sm:text-right">
+        <div>
+          <p class="font-script text-5xl mb-3 text-sky-300">Sky</p>
+          <p class="text-sky-100/70 leading-relaxed">Life is better with fresh fries on hand</p>
+          <p class="text-sky-100/70 leading-relaxed mt-1">مطعم سكاي للفاست فود والبرغر</p>
+        </div>
+
+        <div>
+          <h4 class="font-black text-lg mb-4 text-sky-300">📍 العنوان</h4>
+          <p class="text-sky-100/80 leading-relaxed">ليبيا — طرابلس — حي الأندلس<br/>داخل مارينا الأندلس</p>
+        </div>
+
+        <div>
+          <h4 class="font-black text-lg mb-4 text-sky-300">📞 تواصل معنا</h4>
+          <a href="tel:0910868888" dir="ltr" class="block text-2xl font-black tracking-wider hover:text-sky-300 transition">0910 86 8888</a>
+          <div class="flex justify-center sm:justify-start gap-3 mt-4">
+            <a href="https://www.facebook.com/profile.php?id=61579057209180" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-sky-800 hover:bg-sky-700 transition px-5 py-2.5 rounded-full font-bold text-sm">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.7v8h3.4z"/></svg>
+              فيسبوك
+            </a>
+            <a href="https://www.instagram.com/sky_eatly/" target="_blank" rel="noopener"
+               class="inline-flex items-center gap-2 bg-sky-800 hover:bg-sky-700 transition px-5 py-2.5 rounded-full font-bold text-sm">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.2-.1 1.6-.1 4.8-.1zm0 5.4a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm0 2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm4.6-3.5a1 1 0 110 2 1 1 0 010-2z"/></svg>
+              انستغرام
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-t border-sky-800/70 mt-12 pt-6 text-center text-sky-100/50 text-sm">
+        © <span id="year"></span> مطعم سكاي — جميع الحقوق محفوظة
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════ MOBILE STICKY ACTION BAR ══════════════ -->
+  <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-sky-100 shadow-[0_-10px_30px_-10px_rgba(19,50,62,0.2)] safe-bottom pt-2.5 px-4">
+    <div class="flex gap-3 max-w-md mx-auto">
+      <button onclick="openMenu()"
+        class="flex-1 bg-sky-500 active:bg-sky-600 text-white font-black text-base py-3.5 rounded-2xl transition-colors">
+        🍔 المنيو
+      </button>
+      <a href="tel:0910868888"
+        class="flex-1 text-center bg-sky-50 active:bg-sky-100 text-sky-700 border border-sky-200 font-black text-base py-3.5 rounded-2xl transition-colors">
+        📞 اتصل الآن
+      </a>
+    </div>
+  </div>
+
+  <!-- ══════════════ MENU MODAL ══════════════ -->
+  <div id="menuModal" class="fixed inset-0 z-50 hidden hidden-anim" role="dialog" aria-modal="true" aria-label="قائمة الطعام">
+    <div class="absolute inset-0 bg-sky-950/70 backdrop-blur-sm" onclick="closeMenu()"></div>
+
+    <div id="menuPanel" class="relative h-full flex items-end sm:items-center justify-center p-0 sm:p-6">
+      <div class="bg-cream w-full max-w-4xl h-[94dvh] sm:h-[88vh] rounded-t-[2rem] sm:rounded-[2rem] shadow-2xl overflow-hidden flex flex-col">
+
+        <!-- menu header -->
+        <div class="relative bg-gradient-to-l from-sky-400 to-sky-600 text-white px-5 sm:px-10 pt-5 sm:pt-7 pb-4 sm:pb-5 shrink-0">
+          <div class="sm:hidden w-12 h-1.5 bg-white/40 rounded-full mx-auto mb-3"></div>
+          <button onclick="closeMenu()" aria-label="إغلاق"
+            class="absolute top-5 left-4 sm:left-5 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 active:bg-white/30 transition flex items-center justify-center text-xl font-bold">✕</button>
+          <p class="font-script text-3xl sm:text-4xl leading-none mb-1">Sky</p>
+          <h3 class="text-xl sm:text-3xl font-black">قائمة الطعام</h3>
+
+          <!-- category tabs -->
+          <div id="menuTabs" class="flex gap-2.5 mt-4 sm:mt-5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
+        </div>
+
+        <!-- items -->
+        <div id="menuItems" class="menu-scroll menu-paper flex-1 overflow-y-auto px-4 sm:px-10 py-5 sm:py-7"></div>
+
+        <!-- menu footer -->
+        <div class="shrink-0 bg-white border-t border-sky-100 px-4 sm:px-10 py-3.5 sm:py-4 flex flex-wrap items-center justify-between gap-3">
+          <p class="hidden sm:block text-sky-900/60 text-sm font-bold">📍 مارينا الأندلس — طرابلس</p>
+          <a href="tel:0910868888" class="w-full sm:w-auto text-center bg-sky-500 active:bg-sky-600 hover:bg-sky-600 transition text-white font-black px-6 py-3 sm:py-2.5 rounded-full text-sm">
+            اطلب الآن &nbsp;<span dir="ltr">0910 86 8888</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
