@@ -90,6 +90,24 @@
     .nav-logo-brand { display: none; }
     #navbar.nav-solid .nav-logo-white { display: none; }
     #navbar.nav-solid .nav-logo-brand { display: block; }
+
+    /* Language switcher — frosted pill on the hero, solid brand pill when scrolled */
+    .lang-toggle {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,0.6);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 4px 14px -6px rgba(19,50,62,0.35);
+    }
+    .lang-toggle:hover { background: rgba(255,255,255,0.32); }
+    #navbar.nav-solid .lang-toggle {
+      background: #2aabc1;
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 8px 18px -6px rgba(38,138,162,0.65);
+    }
+    #navbar.nav-solid .lang-toggle:hover { background: #268aa2; }
   </style>
 </head>
 
@@ -115,7 +133,12 @@
 
         <div class="flex items-center gap-2.5 sm:gap-3">
           <!-- language switch -->
-          <button onclick="toggleLang()" aria-label="Language" class="lang-toggle nav-links transition-colors border-2 border-current text-white font-extrabold text-xs sm:text-sm w-9 h-9 sm:w-10 sm:h-10 rounded-full inline-flex items-center justify-center hover:opacity-80"><span class="lang-label leading-none pt-px">EN</span></button>
+          <button onclick="toggleLang()" aria-label="Switch language" title="Switch language" class="lang-toggle inline-flex items-center gap-1.5 rounded-full font-extrabold text-sm h-9 sm:h-10 px-3 sm:px-3.5 transition-all hover:scale-105 active:scale-95">
+            <svg class="w-4 h-4 sm:w-[18px] sm:h-[18px]" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.9 2.6 15.1 0 18M12 3c-2.6 2.9-2.6 15.1 0 18"/>
+            </svg>
+            <span class="lang-label leading-none">EN</span>
+          </button>
 
           <button onclick="openMenu()"
             class="hidden md:block bg-white text-sky-600 hover:bg-sky-50 font-extrabold text-base px-7 py-2.5 rounded-full shadow-soft transition-transform hover:scale-105 active:scale-95 nav-cta" data-i18n="nav.menu">
