@@ -133,7 +133,11 @@ function applyLang(lang) {
     const v = dict[el.dataset.i18nAria];
     if (v != null) el.setAttribute('aria-label', v);
   });
-  document.querySelectorAll('.lang-label').forEach(el => { el.textContent = isEn() ? 'ع' : 'EN'; });
+  document.querySelectorAll('.lang-label').forEach(el => {
+    el.textContent = isEn() ? 'ع' : 'EN';
+    // optical centering: Tajawal's caps sit high, Arabic glyph sits low
+    el.style.transform = isEn() ? 'translateY(-1px)' : 'translateY(2px)';
+  });
 
   if (menuBuilt) { buildTabs(); buildItems(); setActiveTab(MENU[0].id); }
 }
@@ -239,8 +243,8 @@ function buildItems() {
 
       <!-- menu sheet footer -->
       <div class="text-center pt-4 pb-2 text-sky-900/50 text-sm font-bold leading-relaxed">
-        Life is better with fresh fries on hand<br/>
-        📍 مارينا الأندلس — طرابلس &nbsp;·&nbsp; <span dir="ltr">0910 86 8888</span>
+        <p class="font-script text-3xl text-sky-400 leading-tight mb-1" dir="ltr">Sky it, Love it</p>
+        ${I18N[LANG]['menu.location']} &nbsp;·&nbsp; <span dir="ltr">0910 86 8888</span>
       </div>
     </div>`;
 
