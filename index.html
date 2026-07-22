@@ -6,7 +6,9 @@
   <title>مطعم سكاي | Sky — فاست فود وبرغر</title>
   <meta name="description" content="مطعم سكاي للفاست فود والبرغر — طرابلس، حي الأندلس، داخل مارينا الأندلس. برغر عصاري، دجاج مقرمش، بطاطا ذهبية وصوصات خاصة." />
   <meta name="theme-color" content="#4dc9dc" />
-  <link rel="icon" type="image/jpeg" href="images/logo.jpg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="apple-touch-icon" href="images/favicon-180.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -83,6 +85,11 @@
 
     /* Sticky mobile action bar safe area */
     .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 0.75rem); }
+
+    /* Logo: white variant over hero/dark, brand variant when navbar turns solid */
+    .nav-logo-brand { display: none; }
+    #navbar.nav-solid .nav-logo-white { display: none; }
+    #navbar.nav-solid .nav-logo-brand { display: block; }
   </style>
 </head>
 
@@ -92,26 +99,30 @@
   <header id="navbar" class="fixed top-0 inset-x-0 z-40 transition-all duration-300">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <nav class="flex items-center justify-between h-16 sm:h-20">
-        <a href="#home" class="flex items-center gap-2">
-          <span class="font-script text-4xl sm:text-5xl text-white leading-none nav-logo transition-colors">Sky</span>
+        <a href="#home" class="flex items-center" aria-label="Sky">
+          <img src="images/logo-white.png" alt="Sky" class="nav-logo-white h-11 sm:h-14 w-auto" />
+          <img src="images/logo-brand.png" alt="Sky" class="nav-logo-brand h-11 sm:h-14 w-auto" />
         </a>
 
         <div class="hidden md:flex items-center gap-7 text-sm font-bold text-white nav-links transition-colors">
-          <a href="#home"     class="hover:opacity-70 transition">الرئيسية</a>
-          <a href="#policies" class="hover:opacity-70 transition">سياساتنا</a>
-          <a href="#gallery"  class="hover:opacity-70 transition">أجواؤنا</a>
-          <a href="#goal"     class="hover:opacity-70 transition">هدفنا</a>
-          <a href="#vision"   class="hover:opacity-70 transition">رؤيتنا</a>
-          <a href="#contact"  class="hover:opacity-70 transition">تواصل معنا</a>
+          <a href="#home"     class="hover:opacity-70 transition" data-i18n="nav.home">الرئيسية</a>
+          <a href="#policies" class="hover:opacity-70 transition" data-i18n="nav.policies">سياساتنا</a>
+          <a href="#gallery"  class="hover:opacity-70 transition" data-i18n="nav.gallery">أجواؤنا</a>
+          <a href="#goal"     class="hover:opacity-70 transition" data-i18n="nav.goal">هدفنا</a>
+          <a href="#vision"   class="hover:opacity-70 transition" data-i18n="nav.vision">رؤيتنا</a>
+          <a href="#contact"  class="hover:opacity-70 transition" data-i18n="nav.contact">تواصل معنا</a>
         </div>
 
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2.5 sm:gap-3">
+          <!-- language switch -->
+          <button onclick="toggleLang()" aria-label="Language" class="lang-toggle nav-links transition-colors border-2 border-current text-white font-extrabold text-xs sm:text-sm w-9 h-9 sm:w-10 sm:h-10 rounded-full inline-flex items-center justify-center hover:opacity-80"><span class="lang-label leading-none pt-px">EN</span></button>
+
           <button onclick="openMenu()"
-            class="hidden md:block bg-white text-sky-600 hover:bg-sky-50 font-extrabold text-base px-7 py-2.5 rounded-full shadow-soft transition-transform hover:scale-105 active:scale-95 nav-cta">
+            class="hidden md:block bg-white text-sky-600 hover:bg-sky-50 font-extrabold text-base px-7 py-2.5 rounded-full shadow-soft transition-transform hover:scale-105 active:scale-95 nav-cta" data-i18n="nav.menu">
             🍔 المنيو
           </button>
           <!-- mobile burger -->
-          <button id="mobileBtn" class="md:hidden text-white nav-links p-2 -m-2" aria-label="القائمة">
+          <button id="mobileBtn" class="md:hidden text-white nav-links p-2 -m-2" data-i18n-aria="nav.menuAria" aria-label="القائمة">
             <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/>
             </svg>
@@ -123,12 +134,12 @@
     <!-- mobile dropdown -->
     <div id="mobileMenu" class="md:hidden hidden bg-white/95 backdrop-blur border-t border-sky-100 shadow-card">
       <div class="px-6 py-3 flex flex-col text-sky-900 font-bold text-lg">
-        <a href="#home"     class="mobile-link py-3.5 border-b border-sky-50">الرئيسية</a>
-        <a href="#policies" class="mobile-link py-3.5 border-b border-sky-50">سياساتنا</a>
-        <a href="#gallery"  class="mobile-link py-3.5 border-b border-sky-50">أجواؤنا</a>
-        <a href="#goal"     class="mobile-link py-3.5 border-b border-sky-50">هدفنا</a>
-        <a href="#vision"   class="mobile-link py-3.5 border-b border-sky-50">رؤيتنا</a>
-        <a href="#contact"  class="mobile-link py-3.5">تواصل معنا</a>
+        <a href="#home"     class="mobile-link py-3.5 border-b border-sky-50" data-i18n="nav.home">الرئيسية</a>
+        <a href="#policies" class="mobile-link py-3.5 border-b border-sky-50" data-i18n="nav.policies">سياساتنا</a>
+        <a href="#gallery"  class="mobile-link py-3.5 border-b border-sky-50" data-i18n="nav.gallery">أجواؤنا</a>
+        <a href="#goal"     class="mobile-link py-3.5 border-b border-sky-50" data-i18n="nav.goal">هدفنا</a>
+        <a href="#vision"   class="mobile-link py-3.5 border-b border-sky-50" data-i18n="nav.vision">رؤيتنا</a>
+        <a href="#contact"  class="mobile-link py-3.5" data-i18n="nav.contact">تواصل معنا</a>
       </div>
     </div>
   </header>
@@ -140,13 +151,13 @@
 
     <div class="relative max-w-6xl mx-auto px-4 sm:px-6 pt-24 sm:pt-32 lg:pt-40 pb-16 sm:pb-24 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
       <!-- text -->
-      <div class="text-center lg:text-right">
-        <p class="font-script text-5xl sm:text-7xl mb-2 drop-shadow-sm">Sky</p>
+      <div class="text-center lg:text-start">
+        <img src="images/logo-white.png" alt="Sky" class="h-24 sm:h-32 w-auto mx-auto lg:mx-0 mb-4 drop-shadow-sm" />
         <h1 class="text-3xl sm:text-5xl font-black leading-tight mb-4">
-          مطعم سكاي<br class="sm:hidden" />
-          <span class="text-sky-100">للفاست فود والبرغر</span>
+          <span data-i18n="hero.title1">مطعم سكاي</span><br class="sm:hidden" />
+          <span class="text-sky-100" data-i18n="hero.title2">للفاست فود والبرغر</span>
         </h1>
-        <p class="text-sky-50/95 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6">
+        <p class="text-sky-50/95 text-base sm:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-6" data-i18n="hero.desc">
           وجهتك لعشاق الوجبات السريعة بطعم مختلف وجودة عالية. نقدم تشكيلة متنوعة من البرغر العصاري
           المحضّر من مكونات طازجة، والدجاج المقرمش، والبطاطا الذهبية، إلى جانب الصوصات الخاصة التي
           تضيف لمسة مميزة لكل وجبة.
@@ -154,20 +165,20 @@
 
         <!-- tags: swipeable row on mobile -->
         <div class="snap-row flex lg:flex-wrap justify-start lg:justify-start gap-2.5 mb-8 overflow-x-auto px-1 -mx-1">
-          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🍔 برغر عصاري</span>
-          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🍗 دجاج مقرمش</span>
-          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🍟 بطاطا ذهبية</span>
-          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25">🥫 صوصات خاصة</span>
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25" data-i18n="hero.tag1">🍔 برغر عصاري</span>
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25" data-i18n="hero.tag2">🍗 دجاج مقرمش</span>
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25" data-i18n="hero.tag3">🍟 بطاطا ذهبية</span>
+          <span class="shrink-0 bg-white/15 backdrop-blur px-4 py-2 rounded-full text-sm font-bold border border-white/25" data-i18n="hero.tag4">🥫 صوصات خاصة</span>
         </div>
 
         <!-- CTAs: full-width stacked on mobile -->
         <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-3.5 sm:gap-4">
           <button onclick="openMenu()"
-            class="w-full sm:w-auto bg-white text-sky-600 font-black text-lg px-9 py-4 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
+            class="w-full sm:w-auto bg-white text-sky-600 font-black text-lg px-9 py-4 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform" data-i18n="hero.viewMenu">
             شاهد المنيو 🍔
           </button>
           <a href="tel:0910868888"
-            class="w-full sm:w-auto text-center bg-sky-950/25 backdrop-blur border-2 border-white/60 text-white font-black text-lg px-9 py-4 rounded-full hover:bg-white hover:text-sky-600 transition-colors">
+            class="w-full sm:w-auto text-center bg-sky-950/25 backdrop-blur border-2 border-white/60 text-white font-black text-lg px-9 py-4 rounded-full hover:bg-white hover:text-sky-600 transition-colors" data-i18n="hero.call">
             اتصل بنا 📞
           </a>
         </div>
@@ -194,40 +205,40 @@
   <!-- ══════════════ POLICIES + STANDARDS ══════════════ -->
   <section id="policies" class="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
     <div class="text-center mb-10 sm:mb-14 reveal">
-      <p class="text-sky-500 font-extrabold tracking-wide mb-2">لماذا سكاي؟</p>
-      <h2 class="text-2xl sm:text-4xl font-black">التزامنا تجاهك في كل وجبة</h2>
+      <p class="text-sky-500 font-extrabold tracking-wide mb-2" data-i18n="policies.kicker">لماذا سكاي؟</p>
+      <h2 class="text-2xl sm:text-4xl font-black" data-i18n="policies.title">التزامنا تجاهك في كل وجبة</h2>
     </div>
 
     <div class="grid md:grid-cols-2 gap-5 sm:gap-7">
       <!-- policies card -->
       <div class="reveal bg-white rounded-3xl p-6 sm:p-10 shadow-card border border-sky-100 md:hover:-translate-y-1.5 transition-transform duration-300">
         <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-sky-100 flex items-center justify-center text-3xl mb-5">📋</div>
-        <h3 class="text-xl sm:text-2xl font-black mb-3 text-sky-700">سياساتنا</h3>
-        <p class="text-sky-900/75 leading-relaxed text-base sm:text-lg">
+        <h3 class="text-xl sm:text-2xl font-black mb-3 text-sky-700" data-i18n="policies.p.title">سياساتنا</h3>
+        <p class="text-sky-900/75 leading-relaxed text-base sm:text-lg" data-i18n="policies.p.desc">
           نلتزم بتقديم الطعام الطازج، الحفاظ على نظافة المكان والمطبخ، سرعة تجهيز الطلبات،
           واحترام ملاحظات العملاء لضمان أفضل تجربة ممكنة.
         </p>
         <ul class="mt-5 space-y-3 text-sky-900/80 font-medium">
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> طعام طازج يوميًا</li>
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> نظافة تامة للمكان والمطبخ</li>
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> سرعة في تجهيز الطلبات</li>
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> إصغاء دائم لملاحظات عملائنا</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> <span data-i18n="policies.p.li1">طعام طازج يوميًا</span></li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> <span data-i18n="policies.p.li2">نظافة تامة للمكان والمطبخ</span></li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> <span data-i18n="policies.p.li3">سرعة في تجهيز الطلبات</span></li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-sky-400 shrink-0"></span> <span data-i18n="policies.p.li4">إصغاء دائم لملاحظات عملائنا</span></li>
         </ul>
       </div>
 
       <!-- standards card -->
       <div class="reveal bg-gradient-to-br from-sky-500 to-sky-700 text-white rounded-3xl p-6 sm:p-10 shadow-soft md:hover:-translate-y-1.5 transition-transform duration-300">
         <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/15 flex items-center justify-center text-3xl mb-5">⭐</div>
-        <h3 class="text-xl sm:text-2xl font-black mb-3">معاييرنا</h3>
-        <p class="text-sky-50/90 leading-relaxed text-base sm:text-lg">
+        <h3 class="text-xl sm:text-2xl font-black mb-3" data-i18n="policies.s.title">معاييرنا</h3>
+        <p class="text-sky-50/90 leading-relaxed text-base sm:text-lg" data-i18n="policies.s.desc">
           نعتمد على مكونات مختارة بعناية، تحضير يومي، جودة ثابتة في كل وجبة،
           وخدمة احترافية تضع رضا العميل في المقام الأول.
         </p>
         <ul class="mt-5 space-y-3 font-medium">
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> مكونات مختارة بعناية</li>
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> تحضير يومي طازج</li>
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> جودة ثابتة في كل وجبة</li>
-          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> خدمة احترافية تضع رضاك أولًا</li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> <span data-i18n="policies.s.li1">مكونات مختارة بعناية</span></li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> <span data-i18n="policies.s.li2">تحضير يومي طازج</span></li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> <span data-i18n="policies.s.li3">جودة ثابتة في كل وجبة</span></li>
+          <li class="flex items-center gap-3"><span class="w-2.5 h-2.5 rounded-full bg-gold shrink-0"></span> <span data-i18n="policies.s.li4">خدمة احترافية تضع رضاك أولًا</span></li>
         </ul>
       </div>
     </div>
@@ -238,8 +249,8 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <div class="flex items-end justify-between gap-4 mb-8 sm:mb-12 reveal">
         <div>
-          <p class="text-sky-500 font-extrabold tracking-wide mb-2">📸 من أجواء سكاي</p>
-          <h2 class="text-2xl sm:text-4xl font-black">لقطات من عالمنا</h2>
+          <p class="text-sky-500 font-extrabold tracking-wide mb-2" data-i18n="gallery.kicker">📸 من أجواء سكاي</p>
+          <h2 class="text-2xl sm:text-4xl font-black" data-i18n="gallery.title">لقطات من عالمنا</h2>
         </div>
         <a href="https://www.instagram.com/sky_eatly/" target="_blank" rel="noopener"
            class="shrink-0 inline-flex items-center gap-2 bg-white border border-sky-200 text-sky-600 font-extrabold text-sm px-4 sm:px-5 py-2.5 rounded-full shadow-sm hover:bg-sky-500 hover:text-white hover:border-sky-500 transition-colors">
@@ -288,10 +299,10 @@
              loading="lazy"
              class="relative w-full max-w-lg rounded-3xl shadow-card object-cover" />
       </div>
-      <div class="reveal order-1 lg:order-2 text-center lg:text-right">
-        <div class="inline-flex items-center gap-2 bg-sky-100 text-sky-700 font-extrabold px-4 py-1.5 rounded-full text-sm mb-4">🎯 هدفنا</div>
-        <h2 class="text-2xl sm:text-4xl font-black mb-4 leading-snug">وجبات لذيذة… بأسعار مناسبة وجودة تعتمد عليها</h2>
-        <p class="text-sky-900/75 text-base sm:text-lg leading-relaxed">
+      <div class="reveal order-1 lg:order-2 text-center lg:text-start">
+        <div class="inline-flex items-center gap-2 bg-sky-100 text-sky-700 font-extrabold px-4 py-1.5 rounded-full text-sm mb-4" data-i18n="goal.kicker">🎯 هدفنا</div>
+        <h2 class="text-2xl sm:text-4xl font-black mb-4 leading-snug" data-i18n="goal.title">وجبات لذيذة… بأسعار مناسبة وجودة تعتمد عليها</h2>
+        <p class="text-sky-900/75 text-base sm:text-lg leading-relaxed" data-i18n="goal.desc">
           تقديم وجبات فاست فود لذيذة بأسعار مناسبة وجودة يمكن للعملاء الاعتماد عليها في كل زيارة.
         </p>
       </div>
@@ -305,16 +316,16 @@
     <div class="absolute inset-0 bg-gradient-to-b from-sky-900/90 via-sky-800/85 to-sky-700/90"></div>
 
     <div class="relative max-w-4xl mx-auto px-4 sm:px-6 py-20 sm:py-28 text-center reveal">
-      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 font-extrabold px-5 py-2 rounded-full text-sm mb-6">🚀 رؤيتنا</div>
-      <p class="font-script text-5xl sm:text-6xl mb-6 text-sky-200">Sky</p>
-      <h2 class="text-2xl sm:text-4xl font-black mb-5 leading-snug">علامة رائدة في عالم البرغر والفاست فود</h2>
-      <p class="text-sky-50/90 text-base sm:text-xl leading-relaxed">
+      <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 font-extrabold px-5 py-2 rounded-full text-sm mb-6" data-i18n="vision.kicker">🚀 رؤيتنا</div>
+      <img src="images/logo-white.png" alt="Sky" class="h-20 sm:h-24 w-auto mx-auto mb-6" />
+      <h2 class="text-2xl sm:text-4xl font-black mb-5 leading-snug" data-i18n="vision.title">علامة رائدة في عالم البرغر والفاست فود</h2>
+      <p class="text-sky-50/90 text-base sm:text-xl leading-relaxed" data-i18n="vision.desc">
         أن نرسّخ علامة سكاي كوجهة رائدة في عالم البرغر والفاست فود، بمعايير تشغيل عالمية وهوية محلية
         مميزة. نسعى لبناء براند موثوق يتوسع بثبات، ويُعرف بتجربة متكاملة تجمع بين الجودة، الابتكار،
         سرعة الخدمة، والطعم الذي يجعل العملاء يعودون إلينا بثقة في كل مرة.
       </p>
       <button onclick="openMenu()"
-        class="mt-9 w-full sm:w-auto bg-white text-sky-700 font-black text-lg px-10 py-4 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform">
+        class="mt-9 w-full sm:w-auto bg-white text-sky-700 font-black text-lg px-10 py-4 rounded-full shadow-soft hover:scale-105 active:scale-95 transition-transform" data-i18n="vision.cta">
         اكتشف قائمتنا 🍟
       </button>
     </div>
@@ -323,38 +334,39 @@
   <!-- ══════════════ CONTACT / FOOTER ══════════════ -->
   <footer id="contact" class="bg-sky-950 text-white">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 items-start text-center sm:text-right">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-10 items-start text-center sm:text-start">
         <div>
-          <p class="font-script text-5xl mb-3 text-sky-300">Sky</p>
+          <img src="images/logo-white.png" alt="Sky" class="h-16 w-auto mb-3 mx-auto sm:mx-0" />
           <p class="text-sky-100/70 leading-relaxed">Life is better with fresh fries on hand</p>
-          <p class="text-sky-100/70 leading-relaxed mt-1">مطعم سكاي للفاست فود والبرغر</p>
+          <p class="text-sky-100/70 leading-relaxed mt-1" data-i18n="footer.tagline">مطعم سكاي للفاست فود والبرغر</p>
         </div>
 
         <div>
-          <h4 class="font-black text-lg mb-4 text-sky-300">📍 العنوان</h4>
-          <p class="text-sky-100/80 leading-relaxed">ليبيا — طرابلس — حي الأندلس<br/>داخل مارينا الأندلس</p>
+          <h4 class="font-black text-lg mb-4 text-sky-300" data-i18n="footer.addressTitle">📍 العنوان</h4>
+          <p class="text-sky-100/80 leading-relaxed" data-i18n="footer.address">ليبيا — طرابلس — حي الأندلس<br/>داخل مارينا الأندلس</p>
         </div>
 
         <div>
-          <h4 class="font-black text-lg mb-4 text-sky-300">📞 تواصل معنا</h4>
+          <h4 class="font-black text-lg mb-4 text-sky-300" data-i18n="footer.contactTitle">📞 تواصل معنا</h4>
           <a href="tel:0910868888" dir="ltr" class="block text-2xl font-black tracking-wider hover:text-sky-300 transition">0910 86 8888</a>
+          <a href="mailto:Sky.eatly@gmail.com" dir="ltr" class="inline-block mt-2 text-sky-100/80 font-bold hover:text-sky-300 transition break-all">✉️ Sky.eatly@gmail.com</a>
           <div class="flex justify-center sm:justify-start gap-3 mt-4">
             <a href="https://www.facebook.com/profile.php?id=61579057209180" target="_blank" rel="noopener"
                class="inline-flex items-center gap-2 bg-sky-800 hover:bg-sky-700 transition px-5 py-2.5 rounded-full font-bold text-sm">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M13.5 22v-8h2.7l.4-3.2h-3.1V8.7c0-.9.3-1.6 1.6-1.6h1.7V4.2c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3v2.4H7.4V14h2.7v8h3.4z"/></svg>
-              فيسبوك
+              <span data-i18n="footer.facebook">فيسبوك</span>
             </a>
             <a href="https://www.instagram.com/sky_eatly/" target="_blank" rel="noopener"
                class="inline-flex items-center gap-2 bg-sky-800 hover:bg-sky-700 transition px-5 py-2.5 rounded-full font-bold text-sm">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 1.2.1 1.9.2 2.3.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1.1.4 2.3.1 1.2.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 1.2-.2 1.9-.4 2.3-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1.1.4-2.3.4-1.2.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-1.2-.1-1.9-.2-2.3-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.2-.4-.4-1.1-.4-2.3-.1-1.2-.1-1.6-.1-4.8s0-3.6.1-4.8c.1-1.2.2-1.9.4-2.3.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1.1-.4 2.3-.4 1.2-.1 1.6-.1 4.8-.1zm0 5.4a4.4 4.4 0 110 8.8 4.4 4.4 0 010-8.8zm0 2a2.4 2.4 0 100 4.8 2.4 2.4 0 000-4.8zm4.6-3.5a1 1 0 110 2 1 1 0 010-2z"/></svg>
-              انستغرام
+              <span data-i18n="footer.instagram">انستغرام</span>
             </a>
           </div>
         </div>
       </div>
 
       <div class="border-t border-sky-800/70 mt-12 pt-6 text-center text-sky-100/50 text-sm">
-        © <span id="year"></span> مطعم سكاي — جميع الحقوق محفوظة
+        © <span id="year"></span> <span data-i18n="footer.rights">مطعم سكاي — جميع الحقوق محفوظة</span>
       </div>
     </div>
   </footer>
@@ -363,11 +375,11 @@
   <div class="md:hidden fixed bottom-0 inset-x-0 z-40 bg-white/95 backdrop-blur border-t border-sky-100 shadow-[0_-10px_30px_-10px_rgba(19,50,62,0.2)] safe-bottom pt-2.5 px-4">
     <div class="flex gap-3 max-w-md mx-auto">
       <button onclick="openMenu()"
-        class="flex-1 bg-sky-500 active:bg-sky-600 text-white font-black text-base py-3.5 rounded-2xl transition-colors">
+        class="flex-1 bg-sky-500 active:bg-sky-600 text-white font-black text-base py-3.5 rounded-2xl transition-colors" data-i18n="sticky.menu">
         🍔 المنيو
       </button>
       <a href="tel:0910868888"
-        class="flex-1 text-center bg-sky-50 active:bg-sky-100 text-sky-700 border border-sky-200 font-black text-base py-3.5 rounded-2xl transition-colors">
+        class="flex-1 text-center bg-sky-50 active:bg-sky-100 text-sky-700 border border-sky-200 font-black text-base py-3.5 rounded-2xl transition-colors" data-i18n="sticky.call">
         📞 اتصل الآن
       </a>
     </div>
@@ -383,10 +395,10 @@
         <!-- menu header -->
         <div class="relative bg-gradient-to-l from-sky-400 to-sky-600 text-white px-5 sm:px-10 pt-5 sm:pt-7 pb-4 sm:pb-5 shrink-0">
           <div class="sm:hidden w-12 h-1.5 bg-white/40 rounded-full mx-auto mb-3"></div>
-          <button onclick="closeMenu()" aria-label="إغلاق"
+          <button onclick="closeMenu()" aria-label="Close"
             class="absolute top-5 left-4 sm:left-5 w-11 h-11 rounded-full bg-white/15 hover:bg-white/30 active:bg-white/30 transition flex items-center justify-center text-xl font-bold">✕</button>
-          <p class="font-script text-3xl sm:text-4xl leading-none mb-1">Sky</p>
-          <h3 class="text-xl sm:text-3xl font-black">قائمة الطعام</h3>
+          <img src="images/logo-white.png" alt="Sky" class="h-9 sm:h-11 w-auto mb-1" />
+          <h3 class="text-xl sm:text-3xl font-black" data-i18n="menu.title">قائمة الطعام</h3>
 
           <!-- category tabs -->
           <div id="menuTabs" class="flex gap-2.5 mt-4 sm:mt-5 overflow-x-auto pb-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"></div>
@@ -397,9 +409,9 @@
 
         <!-- menu footer -->
         <div class="shrink-0 bg-white border-t border-sky-100 px-4 sm:px-10 py-3.5 sm:py-4 flex flex-wrap items-center justify-between gap-3">
-          <p class="hidden sm:block text-sky-900/60 text-sm font-bold">📍 مارينا الأندلس — طرابلس</p>
+          <p class="hidden sm:block text-sky-900/60 text-sm font-bold" data-i18n="menu.location">📍 مارينا الأندلس — طرابلس</p>
           <a href="tel:0910868888" class="w-full sm:w-auto text-center bg-sky-500 active:bg-sky-600 hover:bg-sky-600 transition text-white font-black px-6 py-3 sm:py-2.5 rounded-full text-sm">
-            اطلب الآن &nbsp;<span dir="ltr">0910 86 8888</span>
+            <span data-i18n="menu.order">اطلب الآن</span> &nbsp;<span dir="ltr">0910 86 8888</span>
           </a>
         </div>
       </div>
@@ -410,12 +422,12 @@
   <div id="lightbox" class="fixed inset-0 z-[60] hidden" role="dialog" aria-modal="true" aria-label="عرض الصورة">
     <div class="absolute inset-0 bg-sky-950/90 backdrop-blur-sm" onclick="closeLightbox()"></div>
 
-    <button onclick="closeLightbox()" aria-label="إغلاق"
+    <button onclick="closeLightbox()" aria-label="Close"
       class="absolute top-4 left-4 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 active:bg-white/25 transition flex items-center justify-center text-white text-2xl font-bold">✕</button>
 
-    <button onclick="lightboxNav(1)" aria-label="التالي"
+    <button onclick="lightboxNav(1)" aria-label="Next"
       class="absolute top-1/2 -translate-y-1/2 right-2 sm:right-6 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 active:bg-white/25 transition flex items-center justify-center text-white text-3xl pb-1">›</button>
-    <button onclick="lightboxNav(-1)" aria-label="السابق"
+    <button onclick="lightboxNav(-1)" aria-label="Previous"
       class="absolute top-1/2 -translate-y-1/2 left-2 sm:left-6 z-10 w-12 h-12 rounded-full bg-white/10 hover:bg-white/25 active:bg-white/25 transition flex items-center justify-center text-white text-3xl pb-1">‹</button>
 
     <figure class="relative h-full flex flex-col items-center justify-center p-4 sm:p-12 pointer-events-none">
@@ -425,6 +437,6 @@
     </figure>
   </div>
 
-  <script src="js/main.js?v=4"></script>
+  <script src="js/main.js?v=5"></script>
 </body>
 </html>

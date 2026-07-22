@@ -5,52 +5,140 @@ const MENU = [
   {
     id: 'beef', en: 'Beef Burgers', label: 'برغر لحم', emoji: '🍔',
     items: [
-      { name: 'دبل تشيز برغر', desc: 'قطعتان لحم عصاري، جبنة شيدر مضاعفة، طماطم، خس، صوص سكاي الخاص', img: 'images/thumbs/menu-beef-combo.jpg', tag: 'الأكثر طلبًا' },
-      { name: 'كلاسيك برغر',   desc: 'قطعة لحم عصارية، جبنة شيدر، خس، طماطم، صوص سكاي' },
-      { name: 'سكاي سبيشل',    desc: 'برغر السلسلة الخاص بصوص سكاي السري والمقرمشات', tag: 'جديد' },
-      { name: 'ماشروم برغر',   desc: 'لحم عصاري مع فطر سوتيه وجبنة ذائبة' },
+      { name: 'دبل تشيز برغر', nameEn: 'Double Cheeseburger', desc: 'قطعتان لحم عصاري، جبنة شيدر مضاعفة، طماطم، خس، صوص سكاي الخاص', descEn: 'Two juicy beef patties, double cheddar, tomato, lettuce, Sky signature sauce', img: 'images/thumbs/menu-beef-combo.jpg', tag: 'الأكثر طلبًا', tagEn: 'Best Seller' },
+      { name: 'كلاسيك برغر',   nameEn: 'Classic Burger',      desc: 'قطعة لحم عصارية، جبنة شيدر، خس، طماطم، صوص سكاي', descEn: 'Juicy beef patty, cheddar, lettuce, tomato, Sky sauce' },
+      { name: 'سكاي سبيشل',    nameEn: 'Sky Special',         desc: 'برغر السلسلة الخاص بصوص سكاي السري والمقرمشات', descEn: 'Our signature burger with Sky secret sauce and crispy bits', tag: 'جديد', tagEn: 'New' },
+      { name: 'ماشروم برغر',   nameEn: 'Mushroom Burger',     desc: 'لحم عصاري مع فطر سوتيه وجبنة ذائبة', descEn: 'Juicy beef with sautéed mushrooms and melted cheese' },
     ],
   },
   {
     id: 'chicken', en: 'Chicken Burgers', label: 'برغر دجاج', emoji: '🍗',
     items: [
-      { name: 'كرسبي تشيكن', desc: 'صدر دجاج مقرمش، جبنة شيدر، كول سلو، صوص سكاي الحار', img: 'images/thumbs/menu-chicken-combo.jpg', tag: 'مميز' },
-      { name: 'زنجر حار',    desc: 'دجاج مقرمش حار، خس، جبنة، صوص حار خاص' },
-      { name: 'تشيكن سكاي',  desc: 'دبل دجاج مقرمش بصوص سكاي والجبنة الذائبة' },
+      { name: 'كرسبي تشيكن', nameEn: 'Crispy Chicken', desc: 'صدر دجاج مقرمش، جبنة شيدر، كول سلو، صوص سكاي الحار', descEn: 'Crispy chicken breast, cheddar, coleslaw, Sky spicy sauce', img: 'images/thumbs/menu-chicken-combo.jpg', tag: 'مميز', tagEn: 'Featured' },
+      { name: 'زنجر حار',    nameEn: 'Spicy Zinger',   desc: 'دجاج مقرمش حار، خس، جبنة، صوص حار خاص', descEn: 'Spicy crispy chicken, lettuce, cheese, special hot sauce' },
+      { name: 'تشيكن سكاي',  nameEn: 'Sky Chicken',    desc: 'دبل دجاج مقرمش بصوص سكاي والجبنة الذائبة', descEn: 'Double crispy chicken with Sky sauce and melted cheese' },
     ],
   },
   {
     id: 'sides', en: 'Fries & Sides', label: 'بطاطا وسايدات', emoji: '🍟',
     items: [
-      { name: 'بطاطا سكاي',        desc: 'بطاطا ذهبية مقرمشة بتتبيلة سكاي الخاصة', img: 'images/thumbs/menu-fries.jpg' },
-      { name: 'صوص سكاي الخاص',    desc: 'الصوص السري الذي يكمّل كل وجبة — اطلبه مع أي صنف', img: 'images/thumbs/menu-sauce.jpg' },
-      { name: 'بطاطا بالجبنة',     desc: 'بطاطا ذهبية مغطاة بصوص الجبنة الذائبة' },
-      { name: 'أصابع موزاريلا',    desc: 'قطع موزاريلا مقلية مع صوص المارينارا' },
+      { name: 'بطاطا سكاي',        nameEn: 'Sky Fries',            desc: 'بطاطا ذهبية مقرمشة بتتبيلة سكاي الخاصة', descEn: 'Golden crispy fries with Sky special seasoning', img: 'images/thumbs/menu-fries.jpg' },
+      { name: 'صوص سكاي الخاص',    nameEn: 'Sky Signature Sauce',  desc: 'الصوص السري الذي يكمّل كل وجبة — اطلبه مع أي صنف', descEn: 'The secret sauce that completes every meal — add it to any item', img: 'images/thumbs/menu-sauce.jpg' },
+      { name: 'بطاطا بالجبنة',     nameEn: 'Cheese Fries',         desc: 'بطاطا ذهبية مغطاة بصوص الجبنة الذائبة', descEn: 'Golden fries smothered in melted cheese sauce' },
+      { name: 'أصابع موزاريلا',    nameEn: 'Mozzarella Sticks',    desc: 'قطع موزاريلا مقلية مع صوص المارينارا', descEn: 'Fried mozzarella sticks with marinara sauce' },
     ],
   },
   {
     id: 'drinks', en: 'Cold Drinks', label: 'مشروبات', emoji: '🥤',
     items: [
-      { name: 'مشروب غازي', desc: 'كوكاكولا · سبرايت · فانتا — مثلّج ومنعش', img: 'images/thumbs/menu-soda.jpg' },
-      { name: 'عصير طبيعي', desc: 'برتقال · فراولة · مانجو — طازج يوميًا' },
-      { name: 'سلاش سكاي',  desc: 'سلاش منعش بنكهات متعددة — توت، فراولة، بلو سكاي' },
+      { name: 'مشروب غازي', nameEn: 'Soft Drinks',  desc: 'كوكاكولا · سبرايت · فانتا — مثلّج ومنعش', descEn: 'Coca-Cola · Sprite · Fanta — iced and refreshing', img: 'images/thumbs/menu-soda.jpg' },
+      { name: 'عصير طبيعي', nameEn: 'Fresh Juice',  desc: 'برتقال · فراولة · مانجو — طازج يوميًا', descEn: 'Orange · Strawberry · Mango — fresh daily' },
+      { name: 'سلاش سكاي',  nameEn: 'Sky Slush',    desc: 'سلاش منعش بنكهات متعددة — توت، فراولة، بلو سكاي', descEn: 'Refreshing slush in many flavors — berry, strawberry, blue sky' },
     ],
   },
   {
     id: 'desserts', en: 'Desserts', label: 'حلويات', emoji: '🍦',
     items: [
-      { name: 'صنداي فراولة', desc: 'آيس كريم كريمي يعلوه صوص الفراولة', img: 'images/thumbs/menu-sundae.jpg', tag: 'جديد' },
+      { name: 'صنداي فراولة', nameEn: 'Strawberry Sundae', desc: 'آيس كريم كريمي يعلوه صوص الفراولة', descEn: 'Creamy ice cream topped with strawberry sauce', img: 'images/thumbs/menu-sundae.jpg', tag: 'جديد', tagEn: 'New' },
     ],
   },
   {
     id: 'boxes', en: 'Family Boxes', label: 'بوكسات عائلية', emoji: '📦',
     items: [
-      { name: 'بوكس العائلة',     desc: '4 برغر مشكّل (لحم ودجاج) + 4 بطاطا سكاي', img: 'images/thumbs/menu-family-box.jpg', tag: 'وفّر أكثر' },
-      { name: 'بوكس سكاي الكبير', desc: '6 برغر مشكّل + 6 بطاطا سكاي — يكفي كل العائلة', img: 'images/thumbs/menu-mega-box.jpg' },
-      { name: 'بوكس ثنائي',       desc: '2 برغر + 2 بطاطا + 2 مشروب' },
+      { name: 'بوكس العائلة',     nameEn: 'Family Box',   desc: '4 برغر مشكّل (لحم ودجاج) + 4 بطاطا سكاي', descEn: '4 mixed burgers (beef & chicken) + 4 Sky fries', img: 'images/thumbs/menu-family-box.jpg', tag: 'وفّر أكثر', tagEn: 'Save More' },
+      { name: 'بوكس سكاي الكبير', nameEn: 'Sky Mega Box',  desc: '6 برغر مشكّل + 6 بطاطا سكاي — يكفي كل العائلة', descEn: '6 mixed burgers + 6 Sky fries — enough for the whole family', img: 'images/thumbs/menu-mega-box.jpg' },
+      { name: 'بوكس ثنائي',       nameEn: 'Duo Box',      desc: '2 برغر + 2 بطاطا + 2 مشروب', descEn: '2 burgers + 2 fries + 2 drinks' },
     ],
   },
 ];
+
+/* ═══════════════ i18n (Arabic / English) ═══════════════ */
+const I18N = {
+  ar: {
+    'nav.home': 'الرئيسية', 'nav.policies': 'سياساتنا', 'nav.gallery': 'أجواؤنا',
+    'nav.goal': 'هدفنا', 'nav.vision': 'رؤيتنا', 'nav.contact': 'تواصل معنا',
+    'nav.menu': '🍔 المنيو', 'nav.menuAria': 'القائمة',
+    'hero.title1': 'مطعم سكاي', 'hero.title2': 'للفاست فود والبرغر',
+    'hero.desc': 'وجهتك لعشاق الوجبات السريعة بطعم مختلف وجودة عالية. نقدم تشكيلة متنوعة من البرغر العصاري المحضّر من مكونات طازجة، والدجاج المقرمش، والبطاطا الذهبية، إلى جانب الصوصات الخاصة التي تضيف لمسة مميزة لكل وجبة.',
+    'hero.tag1': '🍔 برغر عصاري', 'hero.tag2': '🍗 دجاج مقرمش', 'hero.tag3': '🍟 بطاطا ذهبية', 'hero.tag4': '🥫 صوصات خاصة',
+    'hero.viewMenu': 'شاهد المنيو 🍔', 'hero.call': 'اتصل بنا 📞',
+    'policies.kicker': 'لماذا سكاي؟', 'policies.title': 'التزامنا تجاهك في كل وجبة',
+    'policies.p.title': 'سياساتنا',
+    'policies.p.desc': 'نلتزم بتقديم الطعام الطازج، الحفاظ على نظافة المكان والمطبخ، سرعة تجهيز الطلبات، واحترام ملاحظات العملاء لضمان أفضل تجربة ممكنة.',
+    'policies.p.li1': 'طعام طازج يوميًا', 'policies.p.li2': 'نظافة تامة للمكان والمطبخ', 'policies.p.li3': 'سرعة في تجهيز الطلبات', 'policies.p.li4': 'إصغاء دائم لملاحظات عملائنا',
+    'policies.s.title': 'معاييرنا',
+    'policies.s.desc': 'نعتمد على مكونات مختارة بعناية، تحضير يومي، جودة ثابتة في كل وجبة، وخدمة احترافية تضع رضا العميل في المقام الأول.',
+    'policies.s.li1': 'مكونات مختارة بعناية', 'policies.s.li2': 'تحضير يومي طازج', 'policies.s.li3': 'جودة ثابتة في كل وجبة', 'policies.s.li4': 'خدمة احترافية تضع رضاك أولًا',
+    'gallery.kicker': '📸 من أجواء سكاي', 'gallery.title': 'لقطات من عالمنا',
+    'goal.kicker': '🎯 هدفنا', 'goal.title': 'وجبات لذيذة… بأسعار مناسبة وجودة تعتمد عليها',
+    'goal.desc': 'تقديم وجبات فاست فود لذيذة بأسعار مناسبة وجودة يمكن للعملاء الاعتماد عليها في كل زيارة.',
+    'vision.kicker': '🚀 رؤيتنا', 'vision.title': 'علامة رائدة في عالم البرغر والفاست فود',
+    'vision.desc': 'أن نرسّخ علامة سكاي كوجهة رائدة في عالم البرغر والفاست فود، بمعايير تشغيل عالمية وهوية محلية مميزة. نسعى لبناء براند موثوق يتوسع بثبات، ويُعرف بتجربة متكاملة تجمع بين الجودة، الابتكار، سرعة الخدمة، والطعم الذي يجعل العملاء يعودون إلينا بثقة في كل مرة.',
+    'vision.cta': 'اكتشف قائمتنا 🍟',
+    'footer.tagline': 'مطعم سكاي للفاست فود والبرغر',
+    'footer.addressTitle': '📍 العنوان', 'footer.address': 'ليبيا — طرابلس — حي الأندلس<br/>داخل مارينا الأندلس',
+    'footer.contactTitle': '📞 تواصل معنا', 'footer.facebook': 'فيسبوك', 'footer.instagram': 'انستغرام',
+    'footer.rights': 'مطعم سكاي — جميع الحقوق محفوظة',
+    'sticky.menu': '🍔 المنيو', 'sticky.call': '📞 اتصل الآن',
+    'menu.title': 'قائمة الطعام', 'menu.location': '📍 مارينا الأندلس — طرابلس', 'menu.order': 'اطلب الآن',
+  },
+  en: {
+    'nav.home': 'Home', 'nav.policies': 'Policies', 'nav.gallery': 'Gallery',
+    'nav.goal': 'Goal', 'nav.vision': 'Vision', 'nav.contact': 'Contact',
+    'nav.menu': '🍔 Menu', 'nav.menuAria': 'Menu',
+    'hero.title1': 'Sky Restaurant', 'hero.title2': 'Fast Food & Burgers',
+    'hero.desc': 'Your destination for fast-food lovers who want a different taste and top quality. We serve a wide range of juicy burgers made from fresh ingredients, crispy chicken, golden fries, and signature sauces that add a special touch to every meal.',
+    'hero.tag1': '🍔 Juicy Burgers', 'hero.tag2': '🍗 Crispy Chicken', 'hero.tag3': '🍟 Golden Fries', 'hero.tag4': '🥫 Signature Sauces',
+    'hero.viewMenu': 'View Menu 🍔', 'hero.call': 'Call Us 📞',
+    'policies.kicker': 'Why Sky?', 'policies.title': 'Our commitment to you in every meal',
+    'policies.p.title': 'Our Policies',
+    'policies.p.desc': 'We are committed to serving fresh food, keeping the place and kitchen clean, preparing orders quickly, and respecting customer feedback to ensure the best possible experience.',
+    'policies.p.li1': 'Fresh food daily', 'policies.p.li2': 'Spotless place and kitchen', 'policies.p.li3': 'Fast order preparation', 'policies.p.li4': 'Always listening to our customers',
+    'policies.s.title': 'Our Standards',
+    'policies.s.desc': 'We rely on carefully selected ingredients, daily preparation, consistent quality in every meal, and professional service that puts customer satisfaction first.',
+    'policies.s.li1': 'Carefully selected ingredients', 'policies.s.li2': 'Fresh daily preparation', 'policies.s.li3': 'Consistent quality every time', 'policies.s.li4': 'Professional service, your satisfaction first',
+    'gallery.kicker': '📸 Sky vibes', 'gallery.title': 'Snapshots from our world',
+    'goal.kicker': '🎯 Our Goal', 'goal.title': 'Delicious meals… at fair prices with quality you can rely on',
+    'goal.desc': 'To serve delicious fast-food meals at fair prices, with quality customers can count on every visit.',
+    'vision.kicker': '🚀 Our Vision', 'vision.title': 'A leading brand in the world of burgers & fast food',
+    'vision.desc': 'To establish Sky as a leading destination in the world of burgers and fast food, with world-class operating standards and a distinctive local identity. We aim to build a trusted brand that grows steadily, known for a complete experience combining quality, innovation, fast service, and a taste that brings customers back with confidence every time.',
+    'vision.cta': 'Explore our menu 🍟',
+    'footer.tagline': 'Sky Restaurant — Fast Food & Burgers',
+    'footer.addressTitle': '📍 Address', 'footer.address': 'Libya — Tripoli — Al-Andalus<br/>Inside Marina Al-Andalus',
+    'footer.contactTitle': '📞 Contact Us', 'footer.facebook': 'Facebook', 'footer.instagram': 'Instagram',
+    'footer.rights': 'Sky Restaurant — All rights reserved',
+    'sticky.menu': '🍔 Menu', 'sticky.call': '📞 Call Now',
+    'menu.title': 'Our Menu', 'menu.location': '📍 Marina Al-Andalus — Tripoli', 'menu.order': 'Order Now',
+  },
+};
+
+let LANG = localStorage.getItem('lang') || 'ar';
+const isEn = () => LANG === 'en';
+// pick localized field from a menu item/category
+const tf = (obj, field) => (isEn() && obj[field + 'En'] != null) ? obj[field + 'En'] : obj[field];
+
+function applyLang(lang) {
+  LANG = (lang === 'en') ? 'en' : 'ar';
+  localStorage.setItem('lang', LANG);
+  const dict = I18N[LANG];
+
+  document.documentElement.lang = LANG;
+  document.documentElement.dir = isEn() ? 'ltr' : 'rtl';
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = dict[el.dataset.i18n];
+    if (v != null) el.innerHTML = v;
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const v = dict[el.dataset.i18nAria];
+    if (v != null) el.setAttribute('aria-label', v);
+  });
+  document.querySelectorAll('.lang-label').forEach(el => { el.textContent = isEn() ? 'ع' : 'EN'; });
+
+  if (menuBuilt) { buildTabs(); buildItems(); setActiveTab(MENU[0].id); }
+}
+
+function toggleLang() { applyLang(isEn() ? 'ar' : 'en'); }
 
 /* ═══════════════ Menu modal ═══════════════ */
 const modal   = document.getElementById('menuModal');
@@ -63,7 +151,7 @@ function buildTabs() {
     <button data-cat="${cat.id}"
       class="menu-tab whitespace-nowrap px-4 sm:px-5 py-2 rounded-full text-sm font-extrabold transition
              ${i === 0 ? 'bg-white text-sky-600 shadow' : 'bg-white/15 text-white hover:bg-white/25'}">
-      ${cat.emoji} ${cat.label}
+      ${cat.emoji} ${isEn() ? cat.en : cat.label}
     </button>`).join('');
 
   tabsEl.querySelectorAll('.menu-tab').forEach(btn =>
@@ -106,7 +194,7 @@ function buildItems() {
           <!-- section header -->
           <header class="text-center mb-5">
             <p class="font-script text-3xl text-sky-400/90 leading-none mb-1.5">${cat.en}</p>
-            <h4 class="text-xl sm:text-2xl font-black text-sky-950">${cat.emoji} ${cat.label}</h4>
+            <h4 class="text-xl sm:text-2xl font-black text-sky-950">${cat.emoji} ${isEn() ? cat.en : cat.label}</h4>
           </header>
 
           <!-- photo items -->
@@ -115,14 +203,14 @@ function buildItems() {
             ${cat.items.filter(i => i.img).map(item => `
               <article class="bg-white rounded-2xl border border-sky-100 shadow-card overflow-hidden md:hover:-translate-y-1 transition-transform duration-300">
                 <div class="relative h-44 sm:h-48 bg-white">
-                  <img src="${item.img}" alt="${item.name}" loading="lazy"
+                  <img src="${item.img}" alt="${tf(item, 'name')}" loading="lazy"
                        onerror="this.onerror=null;this.src='images/placeholder.svg'"
                        class="w-full h-full object-contain p-2" />
-                  ${item.tag ? `<span class="absolute top-3 right-3 text-[11px] font-extrabold bg-gold text-white px-2.5 py-1 rounded-full shadow">${item.tag}</span>` : ''}
+                  ${item.tag ? `<span class="absolute top-3 ${isEn() ? 'left-3' : 'right-3'} text-[11px] font-extrabold bg-gold text-white px-2.5 py-1 rounded-full shadow">${tf(item, 'tag')}</span>` : ''}
                 </div>
                 <div class="px-4 pb-4 pt-1 text-center">
-                  <h5 class="font-black text-sky-950 text-lg">${item.name}</h5>
-                  <p class="text-sm text-sky-900/60 leading-relaxed mt-1">${item.desc}</p>
+                  <h5 class="font-black text-sky-950 text-lg">${tf(item, 'name')}</h5>
+                  <p class="text-sm text-sky-900/60 leading-relaxed mt-1">${tf(item, 'desc')}</p>
                 </div>
               </article>`).join('')}
           </div>` : ''}
@@ -134,9 +222,9 @@ function buildItems() {
               <div class="py-3 border-b border-dashed border-sky-200/80 last:border-0 flex items-baseline gap-3">
                 <span class="text-sky-300 text-xs shrink-0">✦</span>
                 <div>
-                  <h5 class="font-extrabold text-sky-950 inline">${item.name}</h5>
-                  ${item.tag ? `<span class="text-[10px] font-extrabold bg-gold/15 text-amber-600 px-2 py-0.5 rounded-full mr-1.5">${item.tag}</span>` : ''}
-                  <p class="text-sm text-sky-900/60 leading-relaxed">${item.desc}</p>
+                  <h5 class="font-extrabold text-sky-950 inline">${tf(item, 'name')}</h5>
+                  ${item.tag ? `<span class="text-[10px] font-extrabold bg-gold/15 text-amber-600 px-2 py-0.5 rounded-full ${isEn() ? 'ml-1.5' : 'mr-1.5'}">${tf(item, 'tag')}</span>` : ''}
+                  <p class="text-sm text-sky-900/60 leading-relaxed">${tf(item, 'desc')}</p>
                 </div>
               </div>`).join('')}
           </div>` : ''}
@@ -228,6 +316,7 @@ document.addEventListener('keydown', e => {
 const navbar = document.getElementById('navbar');
 function onScroll() {
   const solid = window.scrollY > 40;
+  navbar.classList.toggle('nav-solid', solid);
   navbar.classList.toggle('bg-white/90', solid);
   navbar.classList.toggle('backdrop-blur', solid);
   navbar.classList.toggle('shadow-card', solid);
@@ -261,3 +350,6 @@ document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 /* ═══════════════ Footer year ═══════════════ */
 document.getElementById('year').textContent = new Date().getFullYear();
+
+/* ═══════════════ Apply saved language on load ═══════════════ */
+applyLang(LANG);
